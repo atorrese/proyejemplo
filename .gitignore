@@ -1,0 +1,9 @@
+.env
+Pipfile.lock
+* .sqlite3
+apps / * / migraciones
+apps / prueba
+__pycaché__
+__pycache__
+.pytest_cache
+.vscode
