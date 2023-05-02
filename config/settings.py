@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 BASE_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,13 +38,13 @@ BASE_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
+print(BASE_DIR)
 LOCAL_APPS = [
     'apps.libreria'
 ]
 
 THIRD_APPS = [
-
+    'rest_framework'
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -51,11 +52,24 @@ INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:9000",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -66,6 +80,7 @@ TEMPLATES = [
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -134,7 +149,7 @@ if DEBUG:
 else:
     STATIC_ROOT = BASE_DIR / 'static/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
+FORM_RENDERER = 'django.forms.renderers.DjangoTemplates'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
